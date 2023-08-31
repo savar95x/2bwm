@@ -1,0 +1,2 @@
+#!/bin/sh
+make && sudo make install && rm -f 2bwm.o
