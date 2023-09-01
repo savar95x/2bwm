@@ -6,4 +6,4 @@ My <a href=https://github.com/venam/2bwm>2bwm</a> build. Basically just edited t
 The rice itself is called "pome."
 
 ### Preview
-<img src=../../.assets/pome.png />
+<img src=.assets/pome.png />
