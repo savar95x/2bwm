@@ -18,14 +18,14 @@ static const bool     resize_by_line          = true;
 static const float    resize_keep_aspect_ratio= 1.03;
 ///---Offsets---///
 /*0)offsetx          1)offsety
- *2)maxwidth         3)maxheight     4)padding between windows*/
-static const uint8_t offsets[] = {40,35,80,70,8};
+ *2)maxwidth         3)maxheight*/
+static const uint8_t offsets[] = {10,10,20,85};
 ///---Colors---///
 /*0)focuscol         1)unfocuscol
  *2)fixedcol         3)unkilcol
  *4)fixedunkilcol    5)outerbordercol
  *6)emptycol         */
-static const char *colors[] = {"#404040"/*"#98a3af"*/,"#323232","#7a8c5c","#ff6666","#cc9933","#282828","#2e3440"};
+static const char *colors[] = {"#404040"/*"#98a3af"*/,"#323232","#2b3120","#490d0a","#422f0f","#282828","#2e3440"};
 /* if this is set to true the inner border and outer borders colors will be swapped */
 static const bool inverted_colors = false;
 ///---Cursor---///
@@ -44,7 +44,7 @@ static const uint8_t borders[] = {20,21,18,18};
  * attribute of the window. You can test this using `xprop WM_NAME`
  */
 #define LOOK_INTO "WM_NAME"
-static const char *ignore_names[] = {/*"bar", "xclock", */"polybar"/*, "polybar-rightbar_eDP1", "polybar-leftbar_eDP1"*/};
+static const char *ignore_names[] = {/*"bar", "xclock", */"polybar", "polybar-battery_eDP1", "polybar-date_eDP1", "polybar-power_eDP1"/**/};
 ///--Menus and Programs---///
 static const char *menucmd[]   = { "dmenu_run", NULL };
 //static const char *termcmd[]   = { "st", NULL };
@@ -54,8 +54,21 @@ static void halfandcentered(const Arg *arg)
 {
 	Arg arg2 = {.i=TWOBWM_MAXHALF_VERTICAL_LEFT};
 	maxhalf(&arg2);
-	Arg arg3 = {.i=TWOBWM_TELEPORT_CENTER};
-	teleport(&arg3);
+	Arg arg3 = {.i=TWOBWM_MAXHALF_FOLD_VERTICAL};
+	maxhalf(&arg3);
+	Arg arg4 = {.i=TWOBWM_TELEPORT_CENTER};
+	teleport(&arg4);
+}
+
+static void fulll(const Arg *arg)
+{
+	Arg arg2 = {.i=TWOBWM_MAXHALF_VERTICAL_LEFT};
+	maxhalf(&arg2);
+	Arg arg3 = {.i=TWOBWM_MAXHALF_UNFOLD_HORIZONTAL};
+	maxhalf(&arg3);
+	Arg arg4 = {.i=TWOBWM_TELEPORT_CENTER};
+	teleport(&arg4);
+
 }
 ///---Sloppy focus behavior---///
 /*
@@ -222,17 +235,18 @@ static key keys[] = {
     {  MOD |CONTROL,      XK_q,                    twobwm_exit,       {.i=0}},
     {  MOD |CONTROL,      XK_r,                    twobwm_restart,    {.i=0}},
     {  MOD ,              XK_space,                halfandcentered,   {.i=0}},
+    {  MOD |SHIFT,        XK_space,                fulll,   {.i=0}},
     // Change current workspace
        DESKTOPCHANGE(     XK_1,                             0)
        DESKTOPCHANGE(     XK_2,                             1)
        DESKTOPCHANGE(     XK_3,                             2)
        DESKTOPCHANGE(     XK_4,                             3)
        DESKTOPCHANGE(     XK_5,                             4)
-       DESKTOPCHANGE(     XK_6,                             5)
-       DESKTOPCHANGE(     XK_7,                             6)
-       DESKTOPCHANGE(     XK_8,                             7)
-       DESKTOPCHANGE(     XK_9,                             8)
-       DESKTOPCHANGE(     XK_0,                             9)
+       //DESKTOPCHANGE(     XK_6,                             5)
+       //DESKTOPCHANGE(     XK_7,                             6)
+       //DESKTOPCHANGE(     XK_8,                             7)
+       //DESKTOPCHANGE(     XK_9,                             8)
+       //DESKTOPCHANGE(     XK_0,                             9)
 };
 // the last argument makes it a root window only event
 static Button buttons[] = {
