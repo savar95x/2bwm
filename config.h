@@ -2,7 +2,7 @@
 ///---Modifiers---///
 #define MOD             XCB_MOD_MASK_4       /* Super/Windows key  or check xmodmap(1) with -pm  defined in /usr/include/xcb/xproto.h */
 #define TERM "st -g 80x20"
-#define BROWSER "$HOME/.local/binbg/dmweb"
+#define BROWSER "$HOME/.local/scripts/dmweb"
 /* doesn't work in this build
 #define CLICK_TO_FOCUS  true
 #define ENABLE_LIMITS   true
@@ -44,9 +44,10 @@ static const uint8_t borders[] = {20,21,18,18};
  * attribute of the window. You can test this using `xprop WM_NAME`
  */
 #define LOOK_INTO "WM_NAME"
-static const char *ignore_names[] = {/*"bar", "xclock", */"polybar", "polybar-battery_eDP1", "polybar-date_eDP1", "polybar-power_eDP1"/**/};
+static const char *ignore_names[] = {/*"bar", "xclock", */"polybar", "polybar-battery_eDP1", "polybar-date_eDP1", "polybar-power_eDP1", "Eww - date"/**/};
 ///--Menus and Programs---///
-static const char *menucmd[]   = { "dmenu_run", NULL };
+//static const char *menucmd[]   = { "dmenu_run", NULL };
+static const char *menucmd[]   = { "rofi", "-show", "drun", NULL };
 //static const char *termcmd[]   = { "st", NULL };
 #define SHCMD(cmd) { .com = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 ///--Custom foo---///
@@ -222,13 +223,14 @@ static key keys[] = {
     {  MOD ,              XK_m,                    start,   SHCMD(TERM " -e ncmpcpp")},
     {  MOD ,              XK_i,                    start,   SHCMD(TERM " -e gotop")},
     {  MOD ,              XK_w,                    start,   SHCMD(BROWSER)},
-    {  MOD ,              XK_s,                    start,   SHCMD("$HOME/.local/binbg/dmlscripts")},
+    {  MOD ,              XK_s,                    start,   SHCMD("$HOME/.local/scripts/dmlscripts")},
+    {  MOD ,              XK_d,                    start,   SHCMD("polybar-msg -p $(xdotool search --name dummy getwindowpid) cmd toggle")},
     {  MOD ,              XK_c,                    start,   SHCMD("pgrep xbanish && pkill xbanish || setsid -f xbanish -t 1")},
     {  NULL ,             XF86XK_AudioLowerVolume, start,   SHCMD("pamixer -d 5 --allow-boost --set-limit 140 && dunstify \"volume: \" -h int:value:$(pamixer --get-volume)")},
     {  NULL ,             XF86XK_AudioRaiseVolume, start,   SHCMD("pamixer -i 5 --allow-boost --set-limit 140 && dunstify \"volume: \" -h int:value:$(pamixer --get-volume)")},
 //    {  MOD ,              XK_Return,               start,   {.com = termcmd}},
     {  MOD ,              XK_Return,               start,   SHCMD(TERM)},
-    {  MOD ,              XK_Insert,               start,   SHCMD("$HOME/.local/binbg/dmpassmenu")},
+    {  MOD ,              XK_Insert,               start,   SHCMD("$HOME/.local/scripts/dmpassmenu")},
     {  MOD |SHIFT ,       XK_Return,               start,   SHCMD(TERM " -e nvim $HOME/docs/scratch.pad")},
     {  MOD |SHIFT ,       XK_r,               	   start,   SHCMD("$HOME/.config/2bwm/autostart.sh")},
     // Exit or restart 2bwm
