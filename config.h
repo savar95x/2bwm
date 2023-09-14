@@ -224,6 +224,7 @@ static key keys[] = {
     {  MOD ,              XK_i,                    start,   SHCMD(TERM " -e gotop")},
     {  MOD ,              XK_w,                    start,   SHCMD(BROWSER)},
     {  MOD ,              XK_s,                    start,   SHCMD("$HOME/.local/scripts/dmlscripts")},
+    {  MOD |SHIFT,        XK_BackSpace,            start,   SHCMD("$HOME/.local/scripts/dmpowermenu")},
     {  MOD ,              XK_d,                    start,   SHCMD("polybar-msg -p $(xdotool search --name dummy getwindowpid) cmd toggle")},
     {  MOD ,              XK_c,                    start,   SHCMD("pgrep xbanish && pkill xbanish || setsid -f xbanish -t 1")},
     {  NULL ,             XF86XK_AudioLowerVolume, start,   SHCMD("pamixer -d 5 --allow-boost --set-limit 140 && dunstify \"volume: \" -h int:value:$(pamixer --get-volume)")},
