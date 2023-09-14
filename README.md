@@ -2,6 +2,7 @@
 
 ## pome.
 ### Preview
+<img src=.assets/new3.png />
 <img src=.assets/pome.png />
 
 ### Details
